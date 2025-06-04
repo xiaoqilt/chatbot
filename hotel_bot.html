@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>聊天客服机器人</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.5.16/dist/vue.global.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: url('pic/sea_play.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .chat-wrapper {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+      width: 90%;
+    }
+
+    .bot-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    #app {
+      flex: 1;
+    }
+
+    p {
+      margin: 0.5em 0;
+    }
+
+    button, input {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 100%;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-wrapper">
+    <img class="bot-image" src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Bot">
+    <div id="app">
+      <div v-for="msg in messages" :key="msg.id">
+        <p><strong>{{ msg.sender }}:</strong> {{ msg.text }}</p>
+      </div>
+
+      <div v-if="step === 0">
+        <button @click="respond(true)">是的</button>
+        <button @click="respond(false)">不用了</button>
+      </div>
+
+      <div v-else-if="step === 1">
+        <input v-model="reminder" placeholder="写下你的提醒事项" />
+        <button @click="submitReminder">提交</button>
+      </div>
+
+      <div v-else-if="step === 2">
+        <button @click="addAnother">再添加一个</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const { createApp, ref } = Vue;
+
+    createApp({
+      setup() {
+        const messages = ref([
+          { id: 1, sender: '机器人', text: '你好呀，最近过得还好吗？我可以帮你记录一些重要的事情～' }
+        ]);
+        const step = ref(0);
+        const reminder = ref('');
+        let id = 2;
+
+        const respond = (yes) => {
+          if (yes) {
+            step.value = 1;
+            messages.value.push({ id: id++, sender: '机器人', text: '请写下你想提醒自己的内容吧～' });
+          } else {
+            messages.value.push({ id: id++, sender: '机器人', text: '好的，如果你需要我，随时都在！保重自己哦。' });
+            step.value = -1;
+          }
+        };
+
+        const submitReminder = () => {
+          messages.value.push({ id: id++, sender: '机器人', text: `我记下啦：「${reminder.value}」~ 要记得哦！` });
+          step.value = 2;
+          reminder.value = '';
+        };
+
+        const addAnother = () => {
+          step.value = 1;
+          messages.value.push({ id: id++, sender: '机器人', text: '再写一个要提醒自己的事情吧～' });
+        };
+
+        return { messages, step, reminder, respond, submitReminder, addAnother };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
