@@ -1,0 +1,26 @@
+/* 引入 Google 字体 */
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap');
+
+/* 全局设置字体、颜色、行距等 */
+body {
+  margin: 0;
+  font-family: 'Noto Sans SC', cursive, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* 标题样式 */
+h1 {
+  font-size: 48px;
+  text-align: center;
+  color: #005577;
+  margin-top: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 可选：段落样式 */
+p {
+  font-size: 18px;
+  padding: 0 20px;
+}
