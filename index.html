@@ -1,9 +1,11 @@
+<!-- 这个代码块使用的是vue3的框架，除了这个代码块之外，其余的工程文件都是使用的vue2的框架 -->
 <!DOCTYPE html>
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
   <title>关心用户的聊天机器人</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@3.5.16/dist/vue.global.min.js"></script>
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
       margin: 0;
@@ -14,6 +16,14 @@
       justify-content: center;
       align-items: center;
       font-family: Arial, sans-serif;
+    }
+    /* 定义大标题的样式和位置 */
+    .google-title {
+      font-family: 'ZCOOL KuaiLe', cursive;
+      font-size: 50px;
+      text-align: center;
+      color: #005577;
+      margin-bottom: 10px;
     }
 
     .chat-wrapper {
@@ -57,6 +67,8 @@
   </style>
 </head>
 <body>
+  <!-- <h1 style="text-align: center; font-size: 2.5em; margin-top: 10px; color: #333;">AI医生在线，看病真方便</h1> -->
+  <h1 class="google-title">🎉 欢迎使用在线好医生！</h1>
   <div class="chat-wrapper">
     <img class="bot-image" src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Bot">
     <div id="app">
